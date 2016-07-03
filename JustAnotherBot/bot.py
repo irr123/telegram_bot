@@ -1,14 +1,22 @@
 # coding: utf-8
 
-import telebot
-import config
+from telegram.ext import Updater, CommandHandler
+from config import token
 
-bot = telebot.TeleBot(config.token)
+def start(bot, update):
+    bot.sendMessage(update.message.chat_id, text='Hello World!')
 
-@bot.message_handler(content_types=["text"])
-def repeat_all_messages(message): # Название функции не играет никакой роли, в принципе
-    bot.send_message(message.chat.id, message.text)
+def hello(bot, update):
+    bot.sendMessage(update.message.chat_id,
+                    text='Hello {0}'.format(update.message.from_user.first_name))
+
+updater = Updater(token)
+
+updater.dispatcher.add_handler(CommandHandler('start', start))
+updater.dispatcher.add_handler(CommandHandler('hello', hello))
 
 
 if __name__ == '__main__':
-    bot.polling(none_stop=True)
+    updater.start_polling()
+    updater.idle()
+
