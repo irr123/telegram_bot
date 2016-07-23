@@ -1,24 +1,17 @@
 # coding: utf-8
 
-
 from .command_interface import AbstractCommand
+from .handler import EXIT
 
 
-class Start(AbstractCommand):
-    def invoke(self):
-        self.bot.sendMessage(
-            self.update.message.chat_id,
-            text='Hello World!'
-        )
+class Test(AbstractCommand):
+    def invoke(self, *args, **kwargs):
+        self.answer('Hello World!\nI\'m working :)')
+        return EXIT
 
 
-class Hello(AbstractCommand):
-    def invoke(self):
-        self.bot.sendMessage(
-            self.update.message.chat_id,
-            text='Hello {0}'.format(self.update.message.from_user.first_name)
-        )
-
-
-
+class Error(AbstractCommand):
+    def invoke(self, *args, **kwargs):
+        self.answer('Error happens: {}'.format(self.args[0]))
+        return EXIT
 
