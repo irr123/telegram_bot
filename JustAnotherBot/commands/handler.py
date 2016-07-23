@@ -3,7 +3,8 @@
 
 from telegram.ext import CommandHandler, MessageHandler, ConversationHandler
 
-START = 0
+UPLOAD_PHOTO = 0
+VOTING= 1
 EXIT = ConversationHandler.END
 
 
