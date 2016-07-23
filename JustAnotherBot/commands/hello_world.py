@@ -1,12 +1,24 @@
 # coding: utf-8
 
 
-def start(bot, update):
-    bot.sendMessage(update.message.chat_id, text='Hello World!')
+from .command_interface import AbstractCommand
 
 
-def hello(bot, update):
-    bot.sendMessage(update.message.chat_id,
-                    text='Hello {0}'.format(update.message.from_user.first_name))
+class Start(AbstractCommand):
+    def invoke(self):
+        self.bot.sendMessage(
+            self.update.message.chat_id,
+            text='Hello World!'
+        )
+
+
+class Hello(AbstractCommand):
+    def invoke(self):
+        self.bot.sendMessage(
+            self.update.message.chat_id,
+            text='Hello {0}'.format(self.update.message.from_user.first_name)
+        )
+
+
 
 

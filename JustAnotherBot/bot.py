@@ -1,34 +1,39 @@
 #!/usr/bin/env
 # coding: utf-8
 
-from telegram.ext import Updater, CommandHandler, MessageHandler
+from telegram.ext import Updater
 from JustAnotherBot.config import token
-from JustAnotherBot.commands.hello_world import start, hello
-from JustAnotherBot.commands.get_pic import get_pic
+from JustAnotherBot.commands.handler import CustomHandler
+from JustAnotherBot.commands.hello_world import Start, Hello
+from JustAnotherBot.commands.get_pic import GetPic
+from JustAnotherBot.pic_recognizer.main import Recognizer
 
-initial_data = [
-    ('start', start),
-    ('hello', hello),
-    ('check', get_pic)
-]
+
+def init_data():
+    return [
+        ('start', Start()),
+        ('hello', Hello()),
+        ('check', GetPic(Recognizer))
+    ]
 
 
 def init_bot(bot_constructor):
     bot = bot_constructor(token)
-    for data in initial_data:
-        bot.dispatcher.add_handler(CommandHandler(*data))
+    data = init_data()
+    for d in data:
+        bot.dispatcher.add_handler(CustomHandler(*d))
 
     return bot
 
 
 if __name__ == '__main__':
-    print('Bot started')
+    print('Bot started!')
     updater = init_bot(Updater)
     try:
         updater.start_polling()
         updater.idle()
     except KeyboardInterrupt:
-        print('Stopping bot')
+        print('Stopping bot...')
         exit(0)
 
 

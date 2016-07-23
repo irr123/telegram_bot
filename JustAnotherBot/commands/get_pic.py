@@ -1,8 +1,11 @@
 # coding: utf-8
 
 
-def get_pic(bot, update):
-    bot.sendMessage(update.message.chat_id, text='Need get pic here')
+from .command_interface import AbstractCommand
+
+class GetPic(AbstractCommand):
+    def invoke(self):
+        self.bot.sendMessage(self.update.message.chat_id, text='Need get pic here')
 
 
 
