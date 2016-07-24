@@ -7,7 +7,7 @@ from .handler import UPLOAD_PHOTO, SELECTING, EXIT
 
 class StartConversation(AbstractCommand):
     def invoke(self, *args, **kwargs):
-        self.answer('Ok, now send me photo')
+        self.answer('Ok, now send me chek\'s photo')
         return UPLOAD_PHOTO
 
 
@@ -21,9 +21,10 @@ class GetPic(AbstractCommand):
         photo_file = self.bot.getFile(self.update.message.photo[-1].file_id)
         photo_file.download(self.current_path)
 
-        self.workers_container.group_storage.set_checks(self.chat_id,
-                                                        self.workers_container.img_recognizer.test_filler(photo_file)
-                                                        )
+        self.workers_container.group_storage.set_checks(
+            self.chat_id,
+            self.workers_container.img_recognizer.test_filler(photo_file)
+        )
 
         self.answer('Photo received!\nNow you can call "/select"')
         return SELECTING
