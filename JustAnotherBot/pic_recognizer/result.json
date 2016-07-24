@@ -1,0 +1,795 @@
+{
+  "language": "ru",
+  "textAngle": 0,
+  "orientation": "Up",
+  "regions": [
+    {
+      "boundingBox": "17,0,359,405",
+      "lines": [
+        {
+          "boundingBox": "118,0,229,31",
+          "words": [
+            {
+              "boundingBox": "118,0,70,31",
+              "text": "Ьткрыт:"
+            },
+            {
+              "boundingBox": "204,10,50,19",
+              "text": "12:59"
+            },
+            {
+              "boundingBox": "264,11,83,20",
+              "text": "05.01.16"
+            }
+          ]
+        },
+        {
+          "boundingBox": "118,30,135,22",
+          "words": [
+            {
+              "boundingBox": "118,30,70,22",
+              "text": "Закрыт:"
+            },
+            {
+              "boundingBox": "204,31,49,19",
+              "text": "14:33"
+            }
+          ]
+        },
+        {
+          "boundingBox": "233,53,51,22",
+          "words": [
+            {
+              "boundingBox": "233,53,51,22",
+              "text": "Кухня"
+            }
+          ]
+        },
+        {
+          "boundingBox": "24,70,9,18",
+          "words": [
+            {
+              "boundingBox": "24,70,9,18",
+              "text": "2"
+            }
+          ]
+        },
+        {
+          "boundingBox": "45,70,176,25",
+          "words": [
+            {
+              "boundingBox": "45,70,51,19",
+              "text": "Салат"
+            },
+            {
+              "boundingBox": "108,73,92,18",
+              "text": "столичный"
+            },
+            {
+              "boundingBox": "211,72,10,23",
+              "text": "р"
+            }
+          ]
+        },
+        {
+          "boundingBox": "45,92,156,23",
+          "words": [
+            {
+              "boundingBox": "45,92,93,21",
+              "text": "Картофель"
+            },
+            {
+              "boundingBox": "150,94,29,21",
+              "text": "фри"
+            },
+            {
+              "boundingBox": "191,93,10,18",
+              "text": "Р"
+            }
+          ]
+        },
+        {
+          "boundingBox": "23,112,216,23",
+          "words": [
+            {
+              "boundingBox": "23,112,10,18",
+              "text": "2"
+            },
+            {
+              "boundingBox": "44,112,62,19",
+              "text": "Шашлык"
+            },
+            {
+              "boundingBox": "118,118,19,13",
+              "text": "из"
+            },
+            {
+              "boundingBox": "149,118,61,17",
+              "text": "курицы"
+            },
+            {
+              "boundingBox": "221,114,18,18",
+              "text": "Р."
+            }
+          ]
+        },
+        {
+          "boundingBox": "44,133,320,24",
+          "words": [
+            {
+              "boundingBox": "44,133,82,18",
+              "text": "Пельмени"
+            },
+            {
+              "boundingBox": "138,138,11,14",
+              "text": "с"
+            },
+            {
+              "boundingBox": "159,139,51,13",
+              "text": "мясом"
+            },
+            {
+              "boundingBox": "221,139,70,18",
+              "text": "молодых"
+            },
+            {
+              "boundingBox": "303,137,61,18",
+              "text": "бычков"
+            }
+          ]
+        },
+        {
+          "boundingBox": "42,174,250,22",
+          "words": [
+            {
+              "boundingBox": "42,174,74,18",
+              "text": "Солянка"
+            },
+            {
+              "boundingBox": "127,175,72,21",
+              "text": "сборная"
+            },
+            {
+              "boundingBox": "210,179,62,15",
+              "text": "мясная"
+            },
+            {
+              "boundingBox": "282,176,10,18",
+              "text": "Р"
+            }
+          ]
+        },
+        {
+          "boundingBox": "242,196,30,21",
+          "words": [
+            {
+              "boundingBox": "242,196,30,21",
+              "text": "Бар"
+            }
+          ]
+        },
+        {
+          "boundingBox": "20,215,9,18",
+          "words": [
+            {
+              "boundingBox": "20,215,9,18",
+              "text": "4"
+            }
+          ]
+        },
+        {
+          "boundingBox": "41,215,251,22",
+          "words": [
+            {
+              "boundingBox": "41,219,42,17",
+              "text": "вода"
+            },
+            {
+              "boundingBox": "94,215,74,19",
+              "text": "бонаква"
+            },
+            {
+              "boundingBox": "179,216,41,18",
+              "text": "0.25"
+            },
+            {
+              "boundingBox": "231,220,17,14",
+              "text": "л."
+            },
+            {
+              "boundingBox": "262,217,30,20",
+              "text": "6/г"
+            }
+          ]
+        },
+        {
+          "boundingBox": "21,235,104,19",
+          "words": [
+            {
+              "boundingBox": "21,235,5,19",
+              "text": "1"
+            },
+            {
+              "boundingBox": "40,236,53,18",
+              "text": "Ассам"
+            },
+            {
+              "boundingBox": "115,236,10,18",
+              "text": "Р"
+            }
+          ]
+        },
+        {
+          "boundingBox": "18,256,326,20",
+          "words": [
+            {
+              "boundingBox": "18,257,10,19",
+              "text": "2"
+            },
+            {
+              "boundingBox": "39,257,43,18",
+              "text": "Пиво"
+            },
+            {
+              "boundingBox": "94,261,73,14",
+              "text": "светлое"
+            },
+            {
+              "boundingBox": "179,256,50,20",
+              "text": "”Bud”"
+            },
+            {
+              "boundingBox": "241,257,31,19",
+              "text": "0.5"
+            },
+            {
+              "boundingBox": "282,262,62,14",
+              "text": "стекло"
+            }
+          ]
+        },
+        {
+          "boundingBox": "19,278,354,23",
+          "words": [
+            {
+              "boundingBox": "19,278,19,19",
+              "text": "10"
+            },
+            {
+              "boundingBox": "49,278,74,22",
+              "text": "Русский"
+            },
+            {
+              "boundingBox": "136,283,83,18",
+              "text": "стандарт"
+            },
+            {
+              "boundingBox": "230,283,83,18",
+              "text": "оригинал"
+            },
+            {
+              "boundingBox": "324,279,20,18",
+              "text": "50"
+            },
+            {
+              "boundingBox": "355,278,18,20",
+              "text": "ml"
+            }
+          ]
+        },
+        {
+          "boundingBox": "17,321,276,19",
+          "words": [
+            {
+              "boundingBox": "17,322,6,18",
+              "text": "1"
+            },
+            {
+              "boundingBox": "37,321,96,19",
+              "text": "Глинтвейн"
+            },
+            {
+              "boundingBox": "145,321,126,19",
+              "text": "классический"
+            },
+            {
+              "boundingBox": "282,321,11,19",
+              "text": "Р"
+            }
+          ]
+        },
+        {
+          "boundingBox": "314,385,62,20",
+          "words": [
+            {
+              "boundingBox": "314,385,62,20",
+              "text": "Итого:"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "boundingBox": "413,76,84,328",
+      "lines": [
+        {
+          "boundingBox": "418,76,71,20",
+          "words": [
+            {
+              "boundingBox": "418,76,71,20",
+              "text": "1300.00"
+            }
+          ]
+        },
+        {
+          "boundingBox": "426,97,60,19",
+          "words": [
+            {
+              "boundingBox": "426,97,60,19",
+              "text": "зоо.оо"
+            }
+          ]
+        },
+        {
+          "boundingBox": "417,118,68,18",
+          "words": [
+            {
+              "boundingBox": "417,118,68,18",
+              "text": "1500.00"
+            }
+          ]
+        },
+        {
+          "boundingBox": "424,138,59,19",
+          "words": [
+            {
+              "boundingBox": "424,138,59,19",
+              "text": "600.00"
+            }
+          ]
+        },
+        {
+          "boundingBox": "423,178,61,19",
+          "words": [
+            {
+              "boundingBox": "423,178,61,19",
+              "text": "650.00"
+            }
+          ]
+        },
+        {
+          "boundingBox": "416,218,70,18",
+          "words": [
+            {
+              "boundingBox": "416,218,70,18",
+              "text": "1000.00"
+            }
+          ]
+        },
+        {
+          "boundingBox": "425,238,62,18",
+          "words": [
+            {
+              "boundingBox": "425,238,62,18",
+              "text": "450.00"
+            }
+          ]
+        },
+        {
+          "boundingBox": "426,258,62,18",
+          "words": [
+            {
+              "boundingBox": "426,258,62,18",
+              "text": "700.00"
+            }
+          ]
+        },
+        {
+          "boundingBox": "417,279,74,18",
+          "words": [
+            {
+              "boundingBox": "417,279,74,18",
+              "text": "3500.00"
+            }
+          ]
+        },
+        {
+          "boundingBox": "429,321,64,19",
+          "words": [
+            {
+              "boundingBox": "429,321,64,19",
+              "text": "550.00"
+            }
+          ]
+        },
+        {
+          "boundingBox": "413,385,84,19",
+          "words": [
+            {
+              "boundingBox": "413,385,84,19",
+              "text": "10550.00"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
+{
+  "language": "ru",
+  "textAngle": 0,
+  "orientation": "Up",
+  "regions": [
+    {
+      "boundingBox": "3,77,67,11",
+      "lines": [
+        {
+          "boundingBox": "3,77,67,11",
+          "words": [
+            {
+              "boundingBox": "3,77,18,10",
+              "text": "РЕГ"
+            },
+            {
+              "boundingBox": "27,78,43,10",
+              "text": "N:1085S"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "boundingBox": "83,16,153,73",
+      "lines": [
+        {
+          "boundingBox": "96,16,96,11",
+          "words": [
+            {
+              "boundingBox": "96,16,12,9",
+              "text": "ИП"
+            },
+            {
+              "boundingBox": "114,16,55,11",
+              "text": "Красыаов"
+            },
+            {
+              "boundingBox": "176,16,9,10",
+              "text": "М,"
+            },
+            {
+              "boundingBox": "188,17,4,9",
+              "text": "Е"
+            }
+          ]
+        },
+        {
+          "boundingBox": "83,32,117,11",
+          "words": [
+            {
+              "boundingBox": "83,34,16,8",
+              "text": "гр."
+            },
+            {
+              "boundingBox": "108,32,55,11",
+              "text": "Толбухина"
+            },
+            {
+              "boundingBox": "170,32,30,10",
+              "text": "45/14"
+            }
+          ]
+        },
+        {
+          "boundingBox": "145,63,91,11",
+          "words": [
+            {
+              "boundingBox": "145,63,24,10",
+              "text": "эк,тз"
+            },
+            {
+              "boundingBox": "176,64,60,10",
+              "text": "1040732294"
+            }
+          ]
+        },
+        {
+          "boundingBox": "151,79,22,10",
+          "words": [
+            {
+              "boundingBox": "151,79,22,10",
+              "text": "инк:"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "boundingBox": "3,93,246,13",
+      "lines": [
+        {
+          "boundingBox": "3,93,246,13",
+          "words": [
+            {
+              "boundingBox": "3,93,34,10",
+              "text": "КАССА:"
+            },
+            {
+              "boundingBox": "40,94,23,9",
+              "text": "0001"
+            },
+            {
+              "boundingBox": "70,94,74,10",
+              "text": "СМЕНА;ОО0173"
+            },
+            {
+              "boundingBox": "150,95,99,11",
+              "text": "аок:соаоаоовззоэ"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "boundingBox": "3,109,108,12",
+      "lines": [
+        {
+          "boundingBox": "3,109,108,12",
+          "words": [
+            {
+              "boundingBox": "3,109,11,10",
+              "text": "05"
+            },
+            {
+              "boundingBox": "21,110,61,11",
+              "text": "Утерханова"
+            },
+            {
+              "boundingBox": "89,110,22,10",
+              "text": "э_Е,"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "boundingBox": "206,111,42,10",
+      "lines": [
+        {
+          "boundingBox": "206,111,42,10",
+          "words": [
+            {
+              "boundingBox": "206,111,29,10",
+              "text": "пол"
+            },
+            {
+              "boundingBox": "237,112,11,9",
+              "text": "12"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "boundingBox": "40,125,171,12",
+      "lines": [
+        {
+          "boundingBox": "40,125,171,12",
+          "words": [
+            {
+              "boundingBox": "40,125,35,10",
+              "text": "ЧЕК"
+            },
+            {
+              "boundingBox": "89,126,23,10",
+              "text": "НА"
+            },
+            {
+              "boundingBox": "126,126,85,11",
+              "text": "ПРОДАЖУ"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "boundingBox": "2,141,178,26",
+      "lines": [
+        {
+          "boundingBox": "2,141,178,11",
+          "words": [
+            {
+              "boundingBox": "2,141,31,10",
+              "text": "ЕУПКА"
+            },
+            {
+              "boundingBox": "39,142,68,9",
+              "text": "облегчковая"
+            },
+            {
+              "boundingBox": "113,142,37,10",
+              "text": "Уг-нииа"
+            },
+            {
+              "boundingBox": "157,142,23,10",
+              "text": "100г"
+            }
+          ]
+        },
+        {
+          "boundingBox": "2,157,37,10",
+          "words": [
+            {
+              "boundingBox": "2,157,37,10",
+              "text": "002048"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "boundingBox": "187,143,55,26",
+      "lines": [
+        {
+          "boundingBox": "187,143,30,11",
+          "words": [
+            {
+              "boundingBox": "187,143,30,11",
+              "text": "русск"
+            }
+          ]
+        },
+        {
+          "boundingBox": "211,159,31,10",
+          "words": [
+            {
+              "boundingBox": "211,159,31,10",
+              "text": "290"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "boundingBox": "2,173,215,12",
+      "lines": [
+        {
+          "boundingBox": "2,173,215,12",
+          "words": [
+            {
+              "boundingBox": "2,173,30,9",
+              "text": "САЛАТ"
+            },
+            {
+              "boundingBox": "82,176,6,7",
+              "text": "с"
+            },
+            {
+              "boundingBox": "132,174,36,11",
+              "text": "606903"
+            },
+            {
+              "boundingBox": "175,176,5,8",
+              "text": "И"
+            },
+            {
+              "boundingBox": "187,174,5,10",
+              "text": "К"
+            },
+            {
+              "boundingBox": "199,175,6,9",
+              "text": "8"
+            },
+            {
+              "boundingBox": "212,175,5,9",
+              "text": "Н"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "boundingBox": "2,188,36,10",
+      "lines": [
+        {
+          "boundingBox": "2,188,36,10",
+          "words": [
+            {
+              "boundingBox": "2,188,36,10",
+              "text": "002471"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "boundingBox": "132,189,36,10",
+      "lines": [
+        {
+          "boundingBox": "132,189,36,10",
+          "words": [
+            {
+              "boundingBox": "132,189,36,10",
+              "text": "*0.194"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "boundingBox": "2,221,182,48",
+      "lines": [
+        {
+          "boundingBox": "57,221,86,19",
+          "words": [
+            {
+              "boundingBox": "57,221,31,18",
+              "text": "ЛОГО"
+            },
+            {
+              "boundingBox": "94,221,6,18",
+              "text": "К"
+            },
+            {
+              "boundingBox": "107,221,36,19",
+              "text": "ОПЛАТЕ"
+            }
+          ]
+        },
+        {
+          "boundingBox": "94,243,49,10",
+          "words": [
+            {
+              "boundingBox": "94,243,49,10",
+              "text": "НАПИЧН\\Е"
+            }
+          ]
+        },
+        {
+          "boundingBox": "2,258,182,11",
+          "words": [
+            {
+              "boundingBox": "2,258,61,10",
+              "text": "18-11-2005"
+            },
+            {
+              "boundingBox": "70,259,30,9",
+              "text": "11:05"
+            },
+            {
+              "boundingBox": "107,259,54,10",
+              "text": "СП101ФР-к"
+            },
+            {
+              "boundingBox": "168,259,16,10",
+              "text": "01."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "boundingBox": "204,190,38,64",
+      "lines": [
+        {
+          "boundingBox": "205,190,37,10",
+          "words": [
+            {
+              "boundingBox": "205,190,37,10",
+              "text": "42.62"
+            }
+          ]
+        },
+        {
+          "boundingBox": "204,244,37,10",
+          "words": [
+            {
+              "boundingBox": "204,244,37,10",
+              "text": "35,52"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
