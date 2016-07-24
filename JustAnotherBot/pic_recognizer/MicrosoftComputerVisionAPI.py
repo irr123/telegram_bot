@@ -4,13 +4,12 @@ from JustAnotherBot.config import MicrosoftCV_API_MaxNumRetries
 import requests
 import json
 
-imageFile = '/home/kiserp/pics/2005-12-06.gif'
+# imageFile = '/home/kiserp/pics/2005-12-06.gif'
 
 
-class MicrosoftComputerVisionAPI:
-
+class MicrosoftComputerVisionAPI(object):
     _maxNumRetries = MicrosoftCV_API_MaxNumRetries
-    _language = 'ru' #optional
+    _language = 'ru'  # optional
     _detectOrientation = 'True'
 
     # get raw image binary, return json
@@ -41,6 +40,5 @@ class MicrosoftComputerVisionAPI:
 
         return result
 
-    def
 
 

@@ -1,8 +1,8 @@
-from  scipy import misc
+from scipy import misc
 import numpy as np
 
-class ImageProcessor:
 
+class ImageProcessor:
     @staticmethod
     def _maximizer(x, maximum, flag=False):
         val = x/maximum
@@ -31,5 +31,5 @@ class ImageProcessor:
         if isinstance(image, str):
             with open(image, 'r') as imageFile:
                 return self._normalize_image(imageFile)
-        elif isinstance(image, file):
+        else:
             return self._normalize_image(image)

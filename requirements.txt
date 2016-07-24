@@ -1,2 +1,7 @@
 python-telegram-bot==5.0.0
+requests==2.10.0
+scipy==0.17.1
+numpy==1.11.1
+
+
 
