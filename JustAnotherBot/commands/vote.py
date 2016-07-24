@@ -66,7 +66,7 @@ class StopSelect(AbstractCommand):
         )
         for user, pay in res.items():
             msg.append('{}: {}'.format(user, pay))
-        self.answer('In result: {}'.format('\n'.join(msg) if msg else 'Фигня какая-то, считайте вручную'))
+        self.answer('In result: \n{}'.format('\n'.join(msg) if msg else 'Фигня какая-то, считайте вручную'))
         return EXIT
 
 
