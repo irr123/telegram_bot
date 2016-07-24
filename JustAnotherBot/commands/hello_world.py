@@ -12,6 +12,10 @@ class Test(AbstractCommand):
 
 class Error(AbstractCommand):
     def invoke(self, *args, **kwargs):
-        self.answer('Error happens: {}'.format(self.args[0]))
+        try:
+            err = args[2].message
+        except IndexError:
+            err = 'Undefined error'
+        self.answer('Error happens: {}'.format(err))
         return EXIT
 

@@ -7,13 +7,14 @@ from telegram.ext import Filters
 from telegram.ext import ConversationHandler
 from JustAnotherBot.config import token
 from JustAnotherBot.commands.handler import\
+    ObjectCallbackHandler, \
     ObjectCommandHandler, ObjectMessageHandler,\
-    UPLOAD_PHOTO, SELECTING
+    UPLOAD_PHOTO, SELECTING, STOP_SELECTING
 from JustAnotherBot.commands.hello_world import Error
 from JustAnotherBot.commands.get_pic import GetPic,\
     PassPic, StartConversation
 from JustAnotherBot.commands.vote import VotingStore, \
-    SelectVoters, GetVoters
+    SelectVoters, GetVoters, StopSelect
 from JustAnotherBot.pic_recognizer.main import BillData
 from JustAnotherBot.store.storage import Store, Container
 
@@ -29,15 +30,25 @@ def init_data():
         states={
             UPLOAD_PHOTO: [
                 ObjectMessageHandler([Filters.photo], GetPic(
-                    BillData()
+                    Container(Store(), BillData())
                 )),
             ],
             SELECTING: [
                 ObjectCommandHandler('select', SelectVoters(
-                    Container(Store(), BillData())
+                    Store()
+                )),
+                ObjectCommandHandler('stop', StopSelect(
+                    Store()
+                )),
+                ObjectCallbackHandler(SelectVoters(
+                    Store()
                 ))
             ],
-
+            STOP_SELECTING: [
+                ObjectCommandHandler('stop', StopSelect(
+                    Store()
+                ))
+            ]
         },
         fallbacks=[ObjectCommandHandler('exit', PassPic())]
     ),\
@@ -51,7 +62,7 @@ def init_bot(bot_constructor):
     bot = bot_constructor(token)
     conv, single = init_data()
     bot.dispatcher.add_handler(conv)
-    bot.dispatcher.add_error_handler(Error())
+    bot.dispatcher.add_error_handler(Error().invoke)
     for s in single:
         bot.dispatcher.add_handler(s)
     return bot
