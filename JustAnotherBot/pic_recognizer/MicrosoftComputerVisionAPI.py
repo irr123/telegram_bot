@@ -1,8 +1,12 @@
 from JustAnotherBot.config import MicrosoftCV_API_Key
 from JustAnotherBot.config import MicrosoftCV_API_URL
 from JustAnotherBot.config import MicrosoftCV_API_MaxNumRetries
+from scipy.misc import imsave
 import requests
-import json
+from uuid import UUID
+import os
+
+from PIL import Image
 
 # imageFile = '/home/kiserp/pics/2005-12-06.gif'
 
@@ -15,10 +19,10 @@ class MicrosoftComputerVisionAPI(object):
     class Box(object):
 
         def __init__(self,x,y,width,height):
-            self.x = x
-            self.y = y
-            self.width = width
-            self.height = height
+            self.x = int(x)
+            self.y = int(y)
+            self.width = int(width)
+            self.height = int(height)
 
 
 
@@ -38,28 +42,32 @@ class MicrosoftComputerVisionAPI(object):
     @staticmethod
     def _request_microsoft_cv_api(image):
         _requestParameters = {'language': MicrosoftComputerVisionAPI._language,
-                          'detectOrientation': MicrosoftComputerVisionAPI._detectOrientation}
+                          'detectOrientation': True}
 
         _requestHeaders = {'Ocp-Apim-Subscription-Key': MicrosoftCV_API_Key,
                        'Content-Type': 'application/octet-stream'}
 
     # with open(imageFile, 'rb') as inFile:
     #     rawImage = inFile.read()
+        tmpFileName = 'test.jpg'
+        result = dict()
 
-        result = json()
-        for i in range(MicrosoftComputerVisionAPI._maxNumRetries):
-            try:
-                apiRequest = requests.post(MicrosoftCV_API_URL,
-                                           params=_requestParameters,
-                                           data=image,
-                                           headers=_requestHeaders)
+        imsave(tmpFileName, image)
 
-                result = apiRequest.json()
+        with open(tmpFileName, 'rb') as tmpFile:
+            for i in range(MicrosoftComputerVisionAPI._maxNumRetries):
+                try:
+                    apiRequest = requests.post(MicrosoftCV_API_URL,
+                                               params=_requestParameters,
+                                               data=tmpFile,
+                                               headers=_requestHeaders)
 
-                break
-            except Exception as ex:
-                print(ex)
+                    result = apiRequest.json()
 
+                    break
+                except Exception as ex:
+                    print(ex)
+        os.remove(tmpFileName)
         return result
 
     @staticmethod
@@ -72,7 +80,7 @@ class MicrosoftComputerVisionAPI(object):
                     box = MicrosoftComputerVisionAPI.Box(coordinates[0], coordinates[1], coordinates[2], coordinates[3])
                     region = MicrosoftComputerVisionAPI.Region([], box)
                     if 'lines' in region_data:
-                        for line_data in region_data['line']:
+                        for line_data in region_data['lines']:
                             if 'boundingBox' in line_data:
                                 coordinates = line_data['boundingBox'].split(',')
                                 box = MicrosoftComputerVisionAPI.Box(coordinates[0], coordinates[1], coordinates[2],
@@ -80,7 +88,7 @@ class MicrosoftComputerVisionAPI(object):
                                 line = MicrosoftComputerVisionAPI.Line('', box)
                                 separator = ' '
                                 if 'words' in line_data:
-                                    line.text = separator.join([word for word in line_data['words']])
+                                    line.text = separator.join([word['text'] for word in line_data['words']])
                                 region.lines.append(line)
                     regions.append(region)
 

@@ -21,22 +21,26 @@ class BillData(object):
     @staticmethod
     def get_data_from_bill_picture(image):
         normalizedImage = ImageProcessor.normalize_image(image)
+
+
         regions = mscvapi.get_data_from_picture(normalizedImage)
         linesByY = dict()
         if len(regions) > 0:
             lineList = []
             for region in regions:
-                lineList.append(region.lines)
+                for line in region.lines:
+                    lineList.append(line)
             for i in range(len(lineList)):
                 yCoordinates = set()
                 similiarLines = set()
                 for j in range(i + 1, len(lineList)):
-                    if abs(lineList[i].box.y - lineList[j].box.y) >= 5:
+                    if abs(lineList[i].box.y - lineList[j].box.y) <= 5:
                         yCoordinates.add(lineList[i].box.y)
                         yCoordinates.add(lineList[j].box.y)
                         similiarLines.add(lineList[j])
                         similiarLines.add(lineList[i])
-                    linesByY.update({floor(sum(yCoordinates)/len(yCoordinates)): list(similiarLines)})
+                    if len(yCoordinates) != 0:
+                        linesByY.update({floor(sum(yCoordinates)/len(yCoordinates)): list(similiarLines)})
         return linesByY
 
 
@@ -44,11 +48,13 @@ class BillData(object):
 
 
 lines = BillData.get_data_from_bill_picture('/tmp/634802986_2730330.jpg')
+result = dict()
 for line in lines:
+    tmp = None
     for key in lines.keys():
-        for a in lines[key]:
-            print('y = %d: %s - %d,%d,%d,%d'%(key, a.text, a.box.x, a.box.y, a.box.width, a.box.height))
-            print('\n')
+        result[lines[key][0].text] = lines[key][1].text
+
+print(result)
 
 
 
