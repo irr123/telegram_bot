@@ -1,4 +1,5 @@
 # coding: utf-8
+from collections import namedtuple
 
 
 class Singleton(type):
@@ -22,5 +23,13 @@ class Store(object, metaclass=Singleton):
 
     def set(self, key, value):
         self.storage[key] = value
+
+
+Container = namedtuple('Container',
+                       [
+                           'user_storage',
+                           'img_recognizer'
+                       ])
+
 
 

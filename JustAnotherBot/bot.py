@@ -9,13 +9,13 @@ from JustAnotherBot.config import token
 from JustAnotherBot.commands.handler import\
     ObjectCommandHandler, ObjectMessageHandler,\
     UPLOAD_PHOTO, SELECTING
-from JustAnotherBot.commands.hello_world import Test, Error
+from JustAnotherBot.commands.hello_world import Error
 from JustAnotherBot.commands.get_pic import GetPic,\
     PassPic, StartConversation
-from JustAnotherBot.commands.vote import VotingStore,\
-    StopVoteStore, GetVoters
-from JustAnotherBot.pic_recognizer.main import Recognizer
-from JustAnotherBot.store.storage import Store
+from JustAnotherBot.commands.vote import VotingStore, \
+    SelectVoters, GetVoters
+from JustAnotherBot.pic_recognizer.main import BillData
+from JustAnotherBot.store.storage import Store, Container
 
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -28,18 +28,22 @@ def init_data():
         entry_points=[ObjectCommandHandler('start', StartConversation())],
         states={
             UPLOAD_PHOTO: [
-                ObjectMessageHandler([Filters.photo], GetPic(Recognizer)),
+                ObjectMessageHandler([Filters.photo], GetPic(
+                    BillData()
+                )),
             ],
             SELECTING: [
-                ObjectCommandHandler('select', StopVoteStore(Store)),
+                ObjectCommandHandler('select', SelectVoters(
+                    Container(Store(), BillData())
+                ))
             ],
 
         },
         fallbacks=[ObjectCommandHandler('exit', PassPic())]
     ),\
     [
-        ObjectMessageHandler([Filters.text], VotingStore(Store)),
-        ObjectCommandHandler('get_voters', GetVoters(Store))
+        ObjectMessageHandler([Filters.text], VotingStore(Store())),
+        ObjectCommandHandler('get_voters', GetVoters(Store()))
     ]
 
 

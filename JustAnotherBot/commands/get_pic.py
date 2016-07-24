@@ -20,7 +20,7 @@ class GetPic(AbstractCommand):
     def invoke(self, *args, **kwargs):
         photo_file = self.bot.getFile(self.update.message.photo[-1].file_id)
         photo_file.download(self.current_path)
-        self.answer('Photo received!\nNow voting process')
+        self.answer('Photo received!\nNow you can call "/select"')
         return SELECTING
 
 
