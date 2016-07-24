@@ -1,4 +1,4 @@
-from scipy import misc
+from scipy.misc import imread
 import numpy as np
 
 
@@ -17,19 +17,17 @@ class ImageProcessor:
         return retval
 
     @staticmethod
-    def _maximizer_vectorized(self, func):
-        return np.vectorize(func)
-
-    @staticmethod
-    def _normalize_image(self, image_file):
-        image = misc.imread(image_file, flatten=True)
+    def _normalize_image(image_file):
+        image = imread(image_file, flatten=True)
         max_value = np.max(image)
-        return self._maximizer_vectorized(self._maximizer_vectorized(image, max_value), max_value, True)
+        maximizer_vectorized = np.vectorize(ImageProcessor._maximizer)
+        return maximizer_vectorized(maximizer_vectorized(image, max_value),
+                                                    max_value, True)
 
     @staticmethod
-    def normalize_image(self,image):    
+    def normalize_image(image):
         if isinstance(image, str):
-            with open(image, 'r') as imageFile:
-                return self._normalize_image(imageFile)
+            with open(image, 'rb') as imageFile:
+                return ImageProcessor._normalize_image(imageFile)
         else:
-            return self._normalize_image(image)
+            return ImageProcessor._normalize_image(image)
