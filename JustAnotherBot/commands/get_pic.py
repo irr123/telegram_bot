@@ -2,7 +2,7 @@
 
 import os
 from .command_interface import AbstractCommand
-from .handler import UPLOAD_PHOTO, VOTING, EXIT
+from .handler import UPLOAD_PHOTO, SELECTING, EXIT
 
 
 class StartConversation(AbstractCommand):
@@ -21,7 +21,7 @@ class GetPic(AbstractCommand):
         photo_file = self.bot.getFile(self.update.message.photo[-1].file_id)
         photo_file.download(self.current_path)
         self.answer('Photo received!\nNow voting process')
-        return VOTING
+        return SELECTING
 
 
 class PassPic(AbstractCommand):

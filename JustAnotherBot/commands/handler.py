@@ -5,6 +5,7 @@ from telegram.ext import CommandHandler, MessageHandler, ConversationHandler
 
 UPLOAD_PHOTO = 0
 VOTING= 1
+SELECTING = 2
 EXIT = ConversationHandler.END
 
 

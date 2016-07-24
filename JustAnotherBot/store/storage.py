@@ -14,6 +14,9 @@ class Store(object, metaclass=Singleton):
     def __init__(self):
         self.storage = dict()
 
+    def __iter__(self):
+        return self.storage.keys()
+
     def get(self, key):
         return self.storage.get(key)
 

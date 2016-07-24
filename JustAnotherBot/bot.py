@@ -8,13 +8,14 @@ from telegram.ext import ConversationHandler
 from JustAnotherBot.config import token
 from JustAnotherBot.commands.handler import\
     ObjectCommandHandler, ObjectMessageHandler,\
-    UPLOAD_PHOTO, VOTING
+    UPLOAD_PHOTO, SELECTING
 from JustAnotherBot.commands.hello_world import Test, Error
 from JustAnotherBot.commands.get_pic import GetPic,\
     PassPic, StartConversation
-from JustAnotherBot.commands.vote import VotingStore, StopVoteStore
+from JustAnotherBot.commands.vote import VotingStore,\
+    StopVoteStore, GetVoters
 from JustAnotherBot.pic_recognizer.main import Recognizer
-from JustAnotherBot.store.storage import Singleton
+from JustAnotherBot.store.storage import Store
 
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -29,16 +30,16 @@ def init_data():
             UPLOAD_PHOTO: [
                 ObjectMessageHandler([Filters.photo], GetPic(Recognizer)),
             ],
-            VOTING: [
-                ObjectMessageHandler([Filters.text], VotingStore(Singleton)),
-                ObjectCommandHandler('stop', StopVoteStore(Singleton)),
+            SELECTING: [
+                ObjectCommandHandler('select', StopVoteStore(Store)),
             ],
 
         },
         fallbacks=[ObjectCommandHandler('exit', PassPic())]
     ),\
     [
-        ObjectCommandHandler('test', Test())
+        ObjectMessageHandler([Filters.text], VotingStore(Store)),
+        ObjectCommandHandler('get_voters', GetVoters(Store))
     ]
 
 

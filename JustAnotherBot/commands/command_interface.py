@@ -5,8 +5,8 @@ import os
 class AbstractCommand(object):
     base_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'checks_photo')
 
-    def __init__(self, worker=None, *args):
-        self.worker = worker
+    def __init__(self, workers_container=None, *args):
+        self.workers_container = workers_container
         self.args = args
         self.bot = None
         self.update = None
