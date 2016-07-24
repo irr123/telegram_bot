@@ -7,15 +7,16 @@ from telegram.ext import Filters
 from telegram.ext import ConversationHandler
 from JustAnotherBot.config import token
 from JustAnotherBot.commands.handler import\
+    ObjectCallbackHandler, \
     ObjectCommandHandler, ObjectMessageHandler,\
-    UPLOAD_PHOTO, SELECTING
-from JustAnotherBot.commands.hello_world import Test, Error
+    UPLOAD_PHOTO, SELECTING, STOP_SELECTING
+from JustAnotherBot.commands.hello_world import Error
 from JustAnotherBot.commands.get_pic import GetPic,\
     PassPic, StartConversation
-from JustAnotherBot.commands.vote import VotingStore,\
-    StopVoteStore, GetVoters
-from JustAnotherBot.pic_recognizer.main import Recognizer
-from JustAnotherBot.store.storage import Store
+from JustAnotherBot.commands.vote import VotingStore, \
+    SelectVoters, GetVoters, StopSelect
+from JustAnotherBot.pic_recognizer.main import BillData
+from JustAnotherBot.store.storage import Store, Container
 
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -28,18 +29,32 @@ def init_data():
         entry_points=[ObjectCommandHandler('start', StartConversation())],
         states={
             UPLOAD_PHOTO: [
-                ObjectMessageHandler([Filters.photo], GetPic(Recognizer)),
+                ObjectMessageHandler([Filters.photo], GetPic(
+                    Container(Store(), BillData())
+                )),
             ],
             SELECTING: [
-                ObjectCommandHandler('select', StopVoteStore(Store)),
+                ObjectCommandHandler('select', SelectVoters(
+                    Store()
+                )),
+                ObjectCommandHandler('stop', StopSelect(
+                    Store()
+                )),
+                ObjectCallbackHandler(SelectVoters(
+                    Store()
+                ))
             ],
-
+            STOP_SELECTING: [
+                ObjectCommandHandler('stop', StopSelect(
+                    Store()
+                ))
+            ]
         },
         fallbacks=[ObjectCommandHandler('exit', PassPic())]
     ),\
     [
-        ObjectMessageHandler([Filters.text], VotingStore(Store)),
-        ObjectCommandHandler('get_voters', GetVoters(Store))
+        ObjectMessageHandler([Filters.text], VotingStore(Store())),
+        ObjectCommandHandler('get_voters', GetVoters(Store()))
     ]
 
 
@@ -47,7 +62,7 @@ def init_bot(bot_constructor):
     bot = bot_constructor(token)
     conv, single = init_data()
     bot.dispatcher.add_handler(conv)
-    bot.dispatcher.add_error_handler(Error())
+    bot.dispatcher.add_error_handler(Error().invoke)
     for s in single:
         bot.dispatcher.add_handler(s)
     return bot

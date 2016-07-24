@@ -1,5 +1,6 @@
 # coding: utf-8
 import os
+import sys
 
 
 class AbstractCommand(object):
@@ -20,8 +21,15 @@ class AbstractCommand(object):
         res = self.invoke()
         return res
 
-    def answer(self, msg):
-        self.bot.sendMessage(self.update.message.chat_id, text=msg)
+    def answer(self, msg, *args, **kwargs):
+        if self.bot:
+            if kwargs.get('chat_id'):
+                chat_id = kwargs.pop('chat_id')
+                self.bot.sendMessage(chat_id, text=msg, **kwargs)
+            else:
+                self.bot.sendMessage(self.update.message.chat_id, text=msg, **kwargs)
+        else:
+            print(msg, file=sys.stderr)
 
     @property
     def chat_id(self):

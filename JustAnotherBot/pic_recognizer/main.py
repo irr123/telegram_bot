@@ -16,7 +16,7 @@ class BillData(object):
         self.total = 0
 
     def test_filler(self, image):
-        self.items = {'Brown Sugar': 234, 'Coffee': 34, 'sousage': 324, 'doll': 32, 'гренки': 232 ,'漢語': 329}
+        return {'Brown Sugar': 234, 'Coffee': 34, 'sousage': 324, 'doll': 32, 'гренки': 232,'漢語': 329}
 
     @staticmethod
     def get_data_from_bill_picture(image):
