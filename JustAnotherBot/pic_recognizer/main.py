@@ -2,6 +2,7 @@
 from pic_recognizer.ImageProcessor import ImageProcessor
 from pic_recognizer.MicrosoftComputerVisionAPI import MicrosoftComputerVisionAPI as mscvapi
 from math import floor
+import re
 
 class BillData(object):
     def __init__(self):
@@ -41,20 +42,36 @@ class BillData(object):
                         similiarLines.add(lineList[i])
                     if len(yCoordinates) != 0:
                         linesByY.update({floor(sum(yCoordinates)/len(yCoordinates)): list(similiarLines)})
-        return linesByY
+
+        result = dict()
+        lines = linesByY
+        # for line in linesByY:
+        #     for key in linesByY.keys():
+        #         result[linesByY[key][0].text] = linesByY[key][1].text
+
+        for line in lines:
+            tmp = None
+            regexp = re.compile('\d+\.*[oOоО\s]*')
+            for key in lines.keys():
+                keytmp = ''
+                val = 0
+                for i in lines[key]:
+                    money = regexp.findall(i.text)
+                    if len(money) > 0:
+                        val = str(money[0])
+                    else:
+                        keytmp = keytmp + ' ' + i.text
+                    result.update({keytmp: int(str(val).split('.')[0])})
+
+        return result
 
 
 
 
 
-lines = BillData.get_data_from_bill_picture('/tmp/634802986_2730330.jpg')
-result = dict()
-for line in lines:
-    tmp = None
-    for key in lines.keys():
-        result[lines[key][0].text] = lines[key][1].text
-
-print(result)
+# lines = BillData.get_data_from_bill_picture('/tmp/634802986_2730330.jpg')
+#
+# print(result)
 
 
 

@@ -23,7 +23,8 @@ class GetPic(AbstractCommand):
 
         self.workers_container.group_storage.set_checks(
             self.chat_id,
-            self.workers_container.img_recognizer.test_filler(photo_file)
+            # self.workers_container.img_recognizer.test_filler(photo_file)
+            self.workers_container.img_recognizer.get_data_from_bill_picture(self.current_path)
         )
 
         self.answer('Photo received!\nNow you can call "/select"')

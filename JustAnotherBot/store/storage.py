@@ -40,7 +40,10 @@ class Store(object, metaclass=Singleton):
             self.users_debt[chat_id] = dict()
         if not self.users_debt[chat_id].get(user_name):
             self.users_debt[chat_id][user_name] = 0
-        self.users_debt[chat_id][user_name] += int(value)
+        try:
+            self.users_debt[chat_id][user_name] += float(value)
+        except ValueError:
+            pass
 
     def get_users_debt(self, chat_id):
         res = self.users_debt[chat_id]
