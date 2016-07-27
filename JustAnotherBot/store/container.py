@@ -1,5 +1,12 @@
 # coding: utf-8
 
+from collections import namedtuple
 
-class Container(object):
-    pass
+
+Container = namedtuple('Container',
+                       [
+                           'group_storage',
+                           'img_recognizer'
+                       ])
+
+

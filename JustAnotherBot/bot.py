@@ -16,7 +16,8 @@ from JustAnotherBot.commands.get_pic import GetPic,\
 from JustAnotherBot.commands.vote import VotingStore, \
     SelectVoters, GetVoters, StopSelect
 from JustAnotherBot.pic_recognizer.main import BillData
-from JustAnotherBot.store.storage import Store, Container
+from JustAnotherBot.store.storage import Store
+from JustAnotherBot.store.container import Container
 
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',

@@ -1,5 +1,4 @@
 # coding: utf-8
-from collections import namedtuple
 
 
 class Singleton(type):
@@ -59,12 +58,6 @@ class Store(object, metaclass=Singleton):
             res = None
         return res
 
-
-Container = namedtuple('Container',
-                       [
-                           'group_storage',
-                           'img_recognizer'
-                       ])
 
 
 

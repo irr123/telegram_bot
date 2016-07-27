@@ -1,8 +1,10 @@
 # coding: utf-8
-from pic_recognizer.ImageProcessor import ImageProcessor
-from pic_recognizer.MicrosoftComputerVisionAPI import MicrosoftComputerVisionAPI as mscvapi
-from math import floor
+
 import re
+from math import floor
+from pic_recognizer.ms_vision_api import MicrosoftComputerVisionAPI as mscvapi
+from pic_recognizer.image_processor import ImageProcessor
+
 
 class BillData(object):
     def __init__(self):
@@ -16,13 +18,12 @@ class BillData(object):
         self.organizationID = ''
         self.total = 0
 
-    def test_filler(self, image):
+    def fake_get_data_from_bill_picture(self, image):
         return {'Brown Sugar': 234, 'Coffee': 34, 'sousage': 324, 'doll': 32, 'гренки': 232,'漢語': 329}
 
     @staticmethod
     def get_data_from_bill_picture(image):
         normalizedImage = ImageProcessor.normalize_image(image)
-
 
         regions = mscvapi.get_data_from_picture(normalizedImage)
         linesByY = dict()
@@ -45,33 +46,29 @@ class BillData(object):
 
         result = dict()
         lines = linesByY
-        # for line in linesByY:
-        #     for key in linesByY.keys():
-        #         result[linesByY[key][0].text] = linesByY[key][1].text
 
-        for line in lines:
-            tmp = None
-            regexp = re.compile('\d+\.*[oOоО\s]*')
-            for key in lines.keys():
-                keytmp = ''
-                val = 0
-                for i in lines[key]:
-                    money = regexp.findall(i.text)
-                    if len(money) > 0:
-                        val = str(money[0])
-                    else:
-                        keytmp = keytmp + ' ' + i.text
-                    result.update({keytmp: int(str(val).split('.')[0])})
+        regexp = re.compile('\d+\.*[oOоО\s]*')
+        for key in lines.keys():
+            keytmp = ''
+            val = 0
+            for i in lines[key]:
+                money = regexp.findall(i.text)
+                if len(money) > 0:
+                    val = str(money[0])
+                else:
+                    keytmp = keytmp + ' ' + i.text
+                result.update({keytmp: int(str(val).split('.')[0])})
 
         return result
 
 
+if __name__ == '__main__':
+    source = '/home/cirno/workspace/telegram_bot/JustAnotherBot/pic_recognizer/fixtures/check1.jpg'
+    # with open(source, 'rb') as f:
+    #     check_image = f.read()
+    result = BillData.get_data_from_bill_picture(source)
+    print('Input: {}\nOutput: {}'.format(source, result))
 
-
-
-# lines = BillData.get_data_from_bill_picture('/tmp/634802986_2730330.jpg')
-#
-# print(result)
 
 
 

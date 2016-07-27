@@ -1,14 +1,9 @@
 from JustAnotherBot.config import MicrosoftCV_API_Key
 from JustAnotherBot.config import MicrosoftCV_API_URL
 from JustAnotherBot.config import MicrosoftCV_API_MaxNumRetries
-from scipy.misc import imsave
+from scipy import misc
 import requests
-from uuid import UUID
 import os
-
-from PIL import Image
-
-# imageFile = '/home/kiserp/pics/2005-12-06.gif'
 
 
 class MicrosoftComputerVisionAPI(object):
@@ -17,42 +12,35 @@ class MicrosoftComputerVisionAPI(object):
     _detectOrientation = 'True'
 
     class Box(object):
-
         def __init__(self,x,y,width,height):
             self.x = int(x)
             self.y = int(y)
             self.width = int(width)
             self.height = int(height)
 
-
-
     class Line(object):
-
         def __init__(self, text, box):
                 self.text = text
                 self.box = box
 
     class Region(object):
-
         def __init__(self, lines, box):
             self.lines = lines
             self.box = box
 
-                # get raw image binary, return json
+    # get raw image binary, return json
     @staticmethod
     def _request_microsoft_cv_api(image):
         _requestParameters = {'language': MicrosoftComputerVisionAPI._language,
-                          'detectOrientation': True}
+                              'detectOrientation': True}
 
         _requestHeaders = {'Ocp-Apim-Subscription-Key': MicrosoftCV_API_Key,
-                       'Content-Type': 'application/octet-stream'}
+                           'Content-Type': 'application/octet-stream'}
 
-    # with open(imageFile, 'rb') as inFile:
-    #     rawImage = inFile.read()
         tmpFileName = 'test.jpg'
         result = dict()
 
-        imsave(tmpFileName, image)
+        misc.imsave(tmpFileName, image)
 
         with open(tmpFileName, 'rb') as tmpFile:
             for i in range(MicrosoftComputerVisionAPI._maxNumRetries):
