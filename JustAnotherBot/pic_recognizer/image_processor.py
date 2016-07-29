@@ -1,5 +1,10 @@
-from scipy.ndimage import imread
+# coding: utf-8
+
+import re
 import numpy as np
+from math import floor
+from scipy.ndimage import imread
+from scipy.misc import toimage
 
 
 class ImageProcessor(object):
@@ -29,10 +34,45 @@ class ImageProcessor(object):
         if isinstance(image, str):
             with open(image, 'rb') as imageFile:
                 norm_image = ImageProcessor._normalize_image(imageFile)
-
         else:
             norm_image = ImageProcessor._normalize_image(image)
 
-        return norm_image
+        return toimage(norm_image)  # return ndarray
 
 
+class WorkaroundFixer(object):
+    def fix_it(self, data):
+        linesByY = dict()
+        if len(data) > 0:
+            lineList = []
+            for region in data:
+                for line in region.lines:
+                    lineList.append(line)
+            for i in range(len(lineList)):
+                yCoordinates = set()
+                similiarLines = set()
+                for j in range(i + 1, len(lineList)):
+                    if abs(lineList[i].box.y - lineList[j].box.y) <= 5:
+                        yCoordinates.add(lineList[i].box.y)
+                        yCoordinates.add(lineList[j].box.y)
+                        similiarLines.add(lineList[j])
+                        similiarLines.add(lineList[i])
+                    if len(yCoordinates) != 0:
+                        linesByY.update({floor(sum(yCoordinates)/len(yCoordinates)): list(similiarLines)})
+
+        result = dict()
+        lines = linesByY
+
+        regexp = re.compile('\d+\.*[oOоО\s]*')
+        for key in lines.keys():
+            keytmp = ''
+            val = 0
+            for i in lines[key]:
+                money = regexp.findall(i.text)
+                if len(money) > 0:
+                    val = str(money[0])
+                else:
+                    keytmp = keytmp + ' ' + i.text
+                result.update({keytmp: int(str(val).split('.')[0])})
+
+        return result

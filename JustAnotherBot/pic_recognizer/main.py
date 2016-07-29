@@ -1,72 +1,38 @@
 # coding: utf-8
 
-import re
-from math import floor
-from pic_recognizer.ms_vision_api import MicrosoftComputerVisionAPI as mscvapi
-from pic_recognizer.image_processor import ImageProcessor
+from JustAnotherBot.pic_recognizer.ms_vision_api import MicrosoftComputerVisionAPI
+from JustAnotherBot.pic_recognizer.image_processor import ImageProcessor, WorkaroundFixer
 
 
 class BillData(object):
-    def __init__(self):
-        self.items = dict()
-        self.billNumber = ''
-        self.organizationName = ''
-        self.timeStamp = ''
-        self.dateFromBill = ''
-        self.timeFromBill = ''
-        self.operatorID = ''
-        self.organizationID = ''
-        self.total = 0
+    def __init__(self, normalizer=ImageProcessor,
+                 recognizer=MicrosoftComputerVisionAPI,
+                 adjuster=WorkaroundFixer):
 
-    def fake_get_data_from_bill_picture(self, image):
-        return {'Brown Sugar': 234, 'Coffee': 34, 'sousage': 324, 'doll': 32, 'гренки': 232,'漢語': 329}
+        self.normalizer = normalizer()
+        self.recognizer = recognizer()
+        self.adjuster = adjuster()
 
-    @staticmethod
-    def get_data_from_bill_picture(image):
-        normalizedImage = ImageProcessor.normalize_image(image)
-
-        regions = mscvapi.get_data_from_picture(normalizedImage)
-        linesByY = dict()
-        if len(regions) > 0:
-            lineList = []
-            for region in regions:
-                for line in region.lines:
-                    lineList.append(line)
-            for i in range(len(lineList)):
-                yCoordinates = set()
-                similiarLines = set()
-                for j in range(i + 1, len(lineList)):
-                    if abs(lineList[i].box.y - lineList[j].box.y) <= 5:
-                        yCoordinates.add(lineList[i].box.y)
-                        yCoordinates.add(lineList[j].box.y)
-                        similiarLines.add(lineList[j])
-                        similiarLines.add(lineList[i])
-                    if len(yCoordinates) != 0:
-                        linesByY.update({floor(sum(yCoordinates)/len(yCoordinates)): list(similiarLines)})
-
-        result = dict()
-        lines = linesByY
-
-        regexp = re.compile('\d+\.*[oOоО\s]*')
-        for key in lines.keys():
-            keytmp = ''
-            val = 0
-            for i in lines[key]:
-                money = regexp.findall(i.text)
-                if len(money) > 0:
-                    val = str(money[0])
-                else:
-                    keytmp = keytmp + ' ' + i.text
-                result.update({keytmp: int(str(val).split('.')[0])})
-
+    def get_data_from_bill_picture(self, image):
+        norm_image = self.normalizer.normalize_image(image)
+        rec_data = self.recognizer.get_data_from_picture(norm_image)
+        result = self.adjuster.fix_it(rec_data)
         return result
 
 
+class FakeBillData(object):
+    def get_data_from_picture(self, image):
+        return {'Brown Sugar': 234, 'Coffee': 34, 'sousage': 324, 'doll': 32, 'гренки': 232, '漢語': 329}
+
+
 if __name__ == '__main__':
-    source = '/home/cirno/workspace/telegram_bot/JustAnotherBot/pic_recognizer/fixtures/check1.jpg'
-    # with open(source, 'rb') as f:
-    #     check_image = f.read()
-    result = BillData.get_data_from_bill_picture(source)
+    """For tests recognizer
+    """
+    from os import path
+
+    source = path.join(path.dirname(path.realpath(__file__)), 'fixtures/check1.jpg')
+    recognizer = BillData()
+    result = recognizer.get_data_from_bill_picture(source)
     print('Input: {}\nOutput: {}'.format(source, result))
 
 

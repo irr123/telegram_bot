@@ -71,12 +71,11 @@ def init_bot(bot_constructor):
 
 if __name__ == '__main__':
     print('Bot started!')
+
     updater = init_bot(Updater)
-    # try:
     updater.start_polling()
     updater.idle()
-    # except KeyboardInterrupt:
-    #     print('Stopping bot...')
+
     exit(0)
 
 
