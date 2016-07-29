@@ -19,12 +19,12 @@ class GetPic(AbstractCommand):
 
     def invoke(self, *args, **kwargs):
         photo_file = self.bot.getFile(self.update.message.photo[-1].file_id)
-        photo_file.download(self.current_path)
+        # photo_file.download(self.current_path)
 
         self.workers_container.group_storage.set_checks(
             self.chat_id,
-            # self.workers_container.img_recognizer.test_filler(photo_file)
-            self.workers_container.img_recognizer.get_data_from_bill_picture(self.current_path)
+            self.workers_container.img_recognizer.get_data_from_bill_picture(photo_file)
+            # self.workers_container.img_recognizer.get_data_from_bill_picture(self.current_path)
         )
 
         self.answer('Photo received!\nNow you can call "/select"')
