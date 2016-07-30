@@ -10,34 +10,38 @@ from scipy.misc import toimage
 class ImageProcessor(object):
     @staticmethod
     def _maximizer(x, maximum, flag=False):
-        val = x/maximum
+        val = x / maximum
         ret_val = 254
+
         if flag and x <= 100:
             ret_val = 0
+
         else:
-            if val < 0.3:
+            if val < 0.5:
                 ret_val = 0
             elif val < 0.5:
                 ret_val = 100
+
         return ret_val
 
-    @staticmethod
-    def _normalize_image(image_file):
+    @classmethod
+    def _normalize_image(cls, image_file):
         image = imread(image_file, flatten=True)
         max_value = np.max(image)
-        maximizer_vectorized = np.vectorize(ImageProcessor._maximizer)
+        maximizer_vectorized = np.vectorize(cls._maximizer)
         return maximizer_vectorized(maximizer_vectorized(image, max_value),
                                     max_value, True)
 
-    @staticmethod
-    def normalize_image(image):
+    @classmethod
+    def normalize_image(cls, image):
         if isinstance(image, str):
             with open(image, 'rb') as imageFile:
-                norm_image = ImageProcessor._normalize_image(imageFile)
-        else:
-            norm_image = ImageProcessor._normalize_image(image)
+                norm_image = cls._normalize_image(imageFile)
 
-        return toimage(norm_image)  # return ndarray
+        else:
+            norm_image = cls._normalize_image(image)
+
+        return toimage(norm_image)
 
 
 class WorkaroundFixer(object):
