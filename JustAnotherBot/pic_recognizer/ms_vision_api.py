@@ -45,6 +45,7 @@ class MicrosoftComputerVisionAPI(AbstractRecognizer):
         file_img = self._prepare_img(image)
         # with open('image.jpg', 'wb') as f:
         #     f.write(file_img.read())
+        #     file_img.seek(0)
         request_parameters = {
             'language': self._language,
             'detectOrientation': True
@@ -67,40 +68,8 @@ class MicrosoftComputerVisionAPI(AbstractRecognizer):
 
         return result
 
-    def _parse_json_result_to_regions_list(self, data):
-        if 'regions' not in data:
-            return None
-
-        regions = []
-        for region_data in data['regions']:
-            if 'boundingBox' not in region_data:
-                continue
-
-            if 'lines' not in region_data:
-                continue
-
-            coordinates = region_data['boundingBox'].split(',')
-            box = self.Box(*coordinates)
-            region = self.Region([], box)
-
-            for line_data in region_data['lines']:
-                if 'boundingBox' not in line_data:
-                    continue
-
-                coordinates = line_data['boundingBox'].split(',')
-                box = self.Box(coordinates[0], coordinates[1], coordinates[2],
-                                                     coordinates[3])
-                line = self.Line('', box)
-                separator = ' '
-                if 'words' in line_data:
-                    line.text = separator.join([word['text'] for word in line_data['words']])
-
-                region.lines.append(line)
-            regions.append(region)
-        return regions
-
     def get_data_from_picture(self, image):
-        data = self._request_microsoft_cv_api(image)
-        return self._parse_json_result_to_regions_list(data)
+        return self._request_microsoft_cv_api(image)
+
 
 

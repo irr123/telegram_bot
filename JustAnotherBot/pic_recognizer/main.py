@@ -30,7 +30,7 @@ if __name__ == '__main__':
     """
     from os import path
 
-    source = path.join(path.dirname(path.realpath(__file__)), 'fixtures/check1.jpg')
+    source = path.join(path.dirname(path.realpath(__file__)), 'fixtures/check2.jpg')
     recognizer = BillData()
     result = recognizer.get_data_from_bill_picture(source)
     print('Input: {}\nOutput: {}'.format(source, result))
