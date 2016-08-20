@@ -8,22 +8,6 @@ from io import BytesIO
 
 
 class AbstractRecognizer(object):
-    class Box(object):
-        def __init__(self, x, y, width, height):
-            self.x = int(x)
-            self.y = int(y)
-            self.width = int(width)
-            self.height = int(height)
-
-    class Line(object):
-        def __init__(self, text, box):
-                self.text = text
-                self.box = box
-
-    class Region(object):
-        def __init__(self, lines, box):
-            self.lines = lines
-            self.box = box
 
     @staticmethod
     def _prepare_img(img):
@@ -43,6 +27,7 @@ class MicrosoftComputerVisionAPI(AbstractRecognizer):
 
     def _request_microsoft_cv_api(self, image):
         file_img = self._prepare_img(image)
+        # show image before recognize
         # with open('image.jpg', 'wb') as f:
         #     f.write(file_img.read())
         #     file_img.seek(0)
@@ -57,15 +42,14 @@ class MicrosoftComputerVisionAPI(AbstractRecognizer):
         result = None
         for i in range(self._maxNumRetries):
             try:
-                apiRequest = requests.post(MicrosoftCV_API_URL,
-                                           params=request_parameters,
-                                           data=file_img.read(),
-                                           headers=request_headers)
-                result = apiRequest.json()
+                api_request = requests.post(MicrosoftCV_API_URL,
+                                            params=request_parameters,
+                                            data=file_img.read(),
+                                            headers=request_headers)
+                result = api_request.json()
                 break
             except Exception as ex:
                 print(ex)
-
         return result
 
     def get_data_from_picture(self, image):

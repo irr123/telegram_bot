@@ -8,7 +8,6 @@ class BillData(object):
     def __init__(self, normalizer=ImageProcessor,
                  recognizer=MicrosoftComputerVisionAPI,
                  adjuster=WorkaroundFixer):
-
         self.normalizer = normalizer()
         self.recognizer = recognizer()
         self.adjuster = adjuster()
@@ -21,6 +20,9 @@ class BillData(object):
 
 
 class FakeBillData(object):
+    def __init__(self, *args, **kwargs):
+        pass
+
     def get_data_from_picture(self, image):
         return {'Brown Sugar': 234, 'Coffee': 34, 'sousage': 324, 'doll': 32, 'гренки': 232, '漢語': 329}
 
